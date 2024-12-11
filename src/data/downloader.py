@@ -60,36 +60,50 @@ class DocumentationDownloader:
         create_directory(output_dir)
         
         # Django docs GitHub URL
-        base_url = f'https://github.com/django/django/tree/stable/{version}.x/docs/'
+        # base_url = f'https://github.com/django/django/tree/stable/{version}.x/docs/'
         
         print(f"Downloading Django {version} documentation...")
         
         # First, get the index page to find all .txt files
-        cert_path = "/home/murad/anaconda3/envs/rag/ssl/cert.pem"
-        response = requests.get(f'{base_url}contents.txt', verify=cert_path)
-        
+        cert_path = "/home/murad/anaconda3/envs/rag/ssl/cacert.pem"
+        response = requests.get(f'https://raw.githubusercontent.com/django/django/refs/heads/stable/{version}.x/docs/contents.txt', verify=cert_path)
+
         if response.status_code == 200:
-            # Parse and download each .txt file
-            for line in response.text.split('\n'):
-                if line.endswith('.txt'):
-                    file_name = line.strip()
-                    file_url = f'{base_url}{file_name}'
-                    
-                    response = requests.get(file_url)
-                    if response.status_code == 200:
-                        file_path = output_dir / file_name
-                        with open(file_path, 'w', encoding='utf-8') as f:
-                            f.write(response.text)
-                        print(f"Downloaded {file_name}")
+            for line in response.text.split("\n"):
+                line = line.strip()
+                new_url = f"https://raw.githubusercontent.com/django/django/refs/heads/stable/4.2.x/docs/{line}.txt"
+
+                response = requests.get(new_url, verify=cert_path)
+
+                if response.status_code == 200:
+                    if "/" in line:
+                        folder_name = new_url.split("/")[-2].strip()
+                        file_name = new_url.split("/")[-1].strip()
+                        file_url = f"{output_dir}/{folder_name}_{file_name}"
                     else:
-                        print(f"Failed to download {file_name}")
-        else:
-            print(f"Failed to access Django documentation. Status code: {response.status_code}")
+                        file_name = new_url.split("/")[-1].strip()
+                        file_url = f"{output_dir}/{file_name}"
+
+                    with open(file_url, "w") as f:
+                        f.write(response.text)
+                    
+                    for new_line in response.text.split("\n"):
+                        fold = new_url.split("/")[:-1]
+                        fold = "/".join(fold)
+                        filee = new_line.strip()
+                        url_1 = f"{fold}/{filee}.txt"
+                        new_response = requests.get(url_1, verify=cert_path)
+                        if new_response.status_code == 200:
+                            new_file_name = url_1.split("/")[-1].strip()
+                            new_file_url = f"{output_dir}/{new_file_name}"
+
+                            with open(new_file_url, "w") as f:
+                                f.write(new_response.text)
 
 def main():
     """Main function to download all documentation."""
     downloader = DocumentationDownloader()
-    # downloader.download_python_docs()
+    downloader.download_python_docs()
     downloader.download_django_docs()
 
 if __name__ == "__main__":
