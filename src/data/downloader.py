@@ -1,8 +1,4 @@
-import os
 import requests
-from pathlib import Path
-from typing import Optional
-from bs4 import BeautifulSoup
 from tqdm import tqdm
 from ..utils.file_utils import create_directory, get_data_directory
 
