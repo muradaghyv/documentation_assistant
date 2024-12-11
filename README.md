@@ -1,0 +1,2 @@
+# Personal Documentation Assistant 
+This project involves creating a personal documentation assistant chatbot for helping developers. The RAG (Retrieval-Augmented Generation) technology is used for extracting the necessary information from the documentations for more accurate and reliable answers. 
