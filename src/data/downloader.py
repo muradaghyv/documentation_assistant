@@ -22,7 +22,7 @@ class DocumentationDownloader:
         # Adjust this URL if the structure changes for other versions.
         base_url = f'https://docs.python.org/{version}/archives/python-{version}.12-docs-html.zip'
         
-        print(f"Downloading Python {version} documentation from {base_url}...")
+        # print(f"Downloading Python {version} documentation from {base_url}...")
         response = requests.get(base_url, stream=True)
         
         if response.status_code == 200:
@@ -40,7 +40,7 @@ class DocumentationDownloader:
                     size = f.write(data)
                     pbar.update(size)
             
-            print(f"Downloaded Python documentation to {zip_path}")
+            # print(f"Downloaded Python documentation to {zip_path}")
         else:
             print(f"Failed to download Python documentation. Status code: {response.status_code}")
 
@@ -55,10 +55,7 @@ class DocumentationDownloader:
         output_dir = self.data_dir / 'django_docs'
         create_directory(output_dir)
         
-        # Django docs GitHub URL
-        # base_url = f'https://github.com/django/django/tree/stable/{version}.x/docs/'
-        
-        print(f"Downloading Django {version} documentation...")
+        # print(f"Downloading Django {version} documentation...")
         
         # First, get the index page to find all .txt files
         cert_path = "/home/murad/anaconda3/envs/rag/ssl/cacert.pem"
@@ -95,12 +92,3 @@ class DocumentationDownloader:
 
                             with open(new_file_url, "w") as f:
                                 f.write(new_response.text)
-
-def main():
-    """Main function to download all documentation."""
-    downloader = DocumentationDownloader()
-    downloader.download_python_docs()
-    downloader.download_django_docs()
-
-if __name__ == "__main__":
-    main()
