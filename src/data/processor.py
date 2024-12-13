@@ -132,28 +132,3 @@ class DocumentProcessor:
                         f.write(chunk.content)
                 except Exception as e:
                     print(f"Error saving chunk to {filepath}: {str(e)}.")
-
-def main():
-    """Main function for processing all documentations."""
-    # Defining processor
-    processor = DocumentProcessor()
-
-    # Collecting chunks
-    all_chunks = []
-
-    # Processing Python documentation
-    print("Processing Python documentation . . .")
-    all_chunks.extend(list(processor.process_python_docs()))
-
-    # Procesing Django Documentation
-    print("Processing Django documentation . . .")
-    all_chunks.extend(list(processor.process_django_docs()))
-
-    # Saving processed chunks
-    print("Saving processed chunks . . .")
-    processor.save_processed_chunks(all_chunks)
-
-    print("Procesing and saving completed!")
-
-if __name__ == "__main__":
-    main()
