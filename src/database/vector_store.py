@@ -51,9 +51,12 @@ class VectorStore:
     def search(self, query: str, n_results: int = 5) -> List[Dict]:
         """Searching for similar documents."""
         query_embedding = self.embedding_manager.create_embedding(text=query)
+        embedding_list = query_embedding.tolist() if isinstance(query_embedding, np.ndarray) else [
+            emb.tolist() if isinstance(emb, np.ndarray) else emb for emb in query_embedding
+        ]
 
         results = self.collection.query(
-            query_embeddings=query_embedding,
+            query_embeddings=[embedding_list],
             n_results=n_results,
             include=["documents", "distances", "metadatas"]
         )
