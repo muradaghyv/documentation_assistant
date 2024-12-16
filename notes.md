@@ -30,3 +30,8 @@ The next stage is generation of embedding and vector space. Most probably, this 
     * embedding of the input query is in array format which is not accepted by the transformer model. This embedding is changed to list format.
 * Search Engine class is defined. The main method, **search()** searchs for the relevant information on the documents and extracts the relevant information in the form of **SearchResult** class form;
 * logging function is added to the utilities for pre-defined and consisted formatting.
+
+### TODO
+* Investigating different types of chunking methods (P.S. Look at the LinkedIn post about RAG system);
+* Deeply investigate and learn the retrieval phase coding. Understand each detail of these codes. 
+* After understanding each part of the code, I can pass to the next stage: Local LLM integration. This will be fun. 
