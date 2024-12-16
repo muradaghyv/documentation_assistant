@@ -19,3 +19,14 @@ The next stage is generation of embedding and vector space. Most probably, this 
 * **ChromaDB** database is initialized, then methods for creating embeddings of processed documents and collecting these embeddings into this *vector store* are built;
 * Downloading and text processing scripts are updated:
     * Running `src/data/downloader.py` or `src/data/processor.py` was respectively downloading the documentations of both Python & Django and processing Python & Django documents automatically and **together**. However, an end-user do not have to download all packages and process all packages. An end-user can download and process only selected documents. This gives him/her more flexibility and control on downloading and processing.
+
+## Notes 16.12.2024
+* Retrieval configuration parameters are set;
+* check_vector_store script added for checking whether vector database is in normal format or not. Path to the diagnostics file: `src/diagnostics/check_vector_store.py`;
+*P.S. The result of this diagnostics is that: vector databse works normal.*
+* The script for cleaning, normalizig and embedding the input query is added (`src/retrieval/querry_processor.py`);
+* Vector store script is changed. Main functions:
+    * search function is updated;
+    * embedding of the input query is in array format which is not accepted by the transformer model. This embedding is changed to list format.
+* Search Engine class is defined. The main method, **search()** searchs for the relevant information on the documents and extracts the relevant information in the form of **SearchResult** class form;
+* logging function is added to the utilities for pre-defined and consisted formatting.
