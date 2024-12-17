@@ -5,7 +5,6 @@ from .query_processor import QueryProcessor
 from .search_result import SearchResult
 from ..utils.logging_utils import setup_logger
 
-from sentence_transformers import SentenceTransformer
 from ..llm.response_generator import ResponseGenerator
 
 logger = setup_logger(__name__)
@@ -47,7 +46,7 @@ class SearchEngine:
             logger.error(f"Error happened during retrieval process: {str(e)}")
             raise
 
-    def retrieval_generate(self, query: str, n_results: int = RetrievalConfig.top_doc) -> Dict[str, Any]:
+    def retrieval_generate(self, query: str) -> Dict[str, Any]:
         """Generating LLM response according to extracted information."""
         try:
             # Searching relevant information
