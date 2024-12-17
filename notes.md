@@ -41,3 +41,23 @@ The next stage is generation of embedding and vector space. Most probably, this 
 * Despite it is not running currently, I have written the base for LLM integration. I think the structure is okay and if I solve that problem, the integration will be completely successful.
 * Inside the **response_generator** script, `generate_response` method is created. The interesting point is that this method uses `generate_response` method of **ollama_client** script. `OllamaClient.generate_response` method uses the methods of *requests* library. If I am creating response like that, why didn't I use *requests* library and its methods inside the **response_generator** script directly? **_I have to look at it._**
 * As I said, LLM integration didn't work out, but it doesn't mean I am giving up on it. 
+
+### Updates
+* I have fixed problems. Now, it is working quite normal. There qere 2 problems: inside the `src/llm/prompt_templates_py` script, I forgot to return the result of **cls** method. Therefore empty prompt was directed to the Ollama model. I have fixed it. The other problem was inside the `src/llm/ollama_client.py` script. When I looked through different documentation inside Ollama's official repo, I have found another type of code for generating response: 
+    ```python
+    response = requests.post("http://localhost:11434/api/generate", json=payload, stream=False)
+    json_data = json.loads(response.text)
+    return (json.dumps(json.loads(json_data["response"]), indent=2))
+    ```
+    * This was giving error, although I have fixed empty prompt problem, I have adjusted to that form:
+    ```python
+    response = requests.post(self.api_endpoint, json=payload)
+    response.raise_for_status()
+
+    return response.json().get("response", "")
+    ```
+
+### TODO
+* Although I have succeeded to integrate the retrieval system with local LLM integration, there are some points that I did not understand quite well. I have to look thorugh them again and again. I have to understand every bit of the codes.
+* Creating interface for this project would be great. I have to check it out.
+* Installation and usage (especially *ollama serve* and other ollama terminal operations) remained unclear for me. I have to check them all. 
