@@ -23,6 +23,6 @@ class PromptTemplates:
     @classmethod
     def create_prompt(cls, context: str, question: str) -> str:
         """Creating a formatting prompt from a context and a question."""
-        cls.ANSWER_TEMPLATE.substitute(
+        return cls.ANSWER_TEMPLATE.substitute(
             context=context, question=question
         )
