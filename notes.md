@@ -35,3 +35,9 @@ The next stage is generation of embedding and vector space. Most probably, this 
 * Investigating different types of chunking methods (P.S. Look at the LinkedIn post about RAG system);
 * Deeply investigate and learn the retrieval phase coding. Understand each detail of these codes. 
 * After understanding each part of the code, I can pass to the next stage: Local LLM integration. This will be fun. 
+
+## Notes 17.12.2024
+* LLM integration is unsuccessful. I cannot run *test_llm.py* script. The error is because of the **response** parameter. When I initialize ollama client, I am doing somthing wrong that creates a problem, and I cannot run the code. 
+* Despite it is not running currently, I have written the base for LLM integration. I think the structure is okay and if I solve that problem, the integration will be completely successful.
+* Inside the **response_generator** script, `generate_response` method is created. The interesting point is that this method uses `generate_response` method of **ollama_client** script. `OllamaClient.generate_response` method uses the methods of *requests* library. If I am creating response like that, why didn't I use *requests* library and its methods inside the **response_generator** script directly? **_I have to look at it._**
+* As I said, LLM integration didn't work out, but it doesn't mean I am giving up on it. 
