@@ -1,6 +1,5 @@
 import requests
 from ..utils.logging_utils import setup_logger
-import json
 
 logger = setup_logger(__name__)
 
@@ -18,19 +17,22 @@ class OllamaClient:
                 "prompt": prompt,
                 "stream": False,    
                 # Add parameters to control response
-                "temperature": 0.7,
+                "temperature": temperature,
                 "top_p": 0.9,
                 "max_tokens": 500
             }
             if system_prompt: 
                 payload["system"] = system_prompt
 
-            response = requests.post("http://localhost:11434/api/generate", json=payload, stream=False)
-            json_data = json.loads(response.text)
-            return (json.dumps(json.loads(json_data["response"]), indent=2))
-        
-        except Exception as e:
+            response = requests.post(self.api_endpoint, json=payload)
+            response.raise_for_status()
+            
+            return response.json().get("response", "")
+            
+        except requests.exceptions.RequestException as e:
             logger.error(f"Error calling Ollama API: {str(e)}")
             raise
+
+
             
         
