@@ -1,9 +1,12 @@
-from typing import List
+from typing import List, Dict, Any
 from ..config.retrieval_config import RetrievalConfig
 from ..database.vector_store import VectorStore
 from .query_processor import QueryProcessor
 from .search_result import SearchResult
 from ..utils.logging_utils import setup_logger
+
+from sentence_transformers import SentenceTransformer
+from ..llm.response_generator import ResponseGenerator
 
 logger = setup_logger(__name__)
 
@@ -11,6 +14,7 @@ class SearchEngine:
     def __init__(self):
         self.vector_store = VectorStore()
         self.query_processor = QueryProcessor()
+        self.response_generator = ResponseGenerator()
     
     def search(self, query: str, n_results: int=RetrievalConfig.top_doc, score: float=RetrievalConfig.threshold) -> List[SearchResult]:
         """Searching for a relevant document."""
@@ -42,4 +46,24 @@ class SearchEngine:
         except Exception as e:
             logger.error(f"Error happened during retrieval process: {str(e)}")
             raise
+
+    def retrieval_generate(self, query: str, n_results: int = RetrievalConfig.top_doc) -> Dict[str, Any]:
+        """Generating LLM response according to extracted information."""
+        try:
+            # Searching relevant information
+            search_results = self.search(query=query)
+            
+            # LLM response
+            llm_response = self.response_generator.generate_response(question=query, search_results=search_results)
+
+            return {
+                "query": query,
+                "search_results": search_results,
+                "llm_response": llm_response
+            }
+        
+        except Exception as e:
+            logger.error(f"Error in generating response: {str(e)}")
+            raise
+
 
