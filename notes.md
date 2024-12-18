@@ -73,3 +73,6 @@ The next stage is generation of embedding and vector space. Most probably, this 
 * Actually, I have understood almost everything, but some tiny details are needed for further clarification.
 
 * After this, I can start for constructing interface for this RAG project.
+
+### TODO
+* `src.retrieval.search_engine` script may be modified. Eliminate *retrieval_generate* method. Because inside the `src.main.test_llm` script, **OllamaClient** can be used generating response, and **search** method of *SearchEngine* object can be defined for extracting the relevant information from the documentation. Codes need to be more compact. Therefore, analyze it carefully.
