@@ -29,3 +29,12 @@ The most important step: **Retrival**.
     * embedded. 
 * Then, with the help of search method inside the VectorStore class, the most similar documentations are searched within vector database according to the input query embedding. 
 * After the most relevant information is found, this information is extracted and decoded to the normal format. 
+
+## The fifth part
+After retrieval mechanism has been constructed, the Large Language Model can be integrated with the retrieval system. With the help of LLM models, answers can be more interactive, coherent and more natural. 
+* Ollama models are used for this integration: llama-2. For starting point, I used **llama-2** model, but I think *llama-3.1* model can be used for more accurate and better responses.
+* LLM integration has been accomplished by these steps:
+    * Firstly, Ollama Client has been defined with the help of `src.llm.ollama_client` script;
+    * OllamaClient object uses *generate_response()* method for generating LLM response.              *generate_response()* method takes 2 main inputs: **input query** entered by an user and **search_result** which is the result of the retrieval system. In other words, **search_results** is the relevant information based on the input query extracted from the documentation. These 2 inputs are fed into the LLM model for generating response.
+    * The result of retrieval mechanism is derived by **search** method of **SearchEngine** object.
+* `src.main.test_llm` is for testing llm response.
