@@ -37,7 +37,7 @@ The next stage is generation of embedding and vector space. Most probably, this 
 * After understanding each part of the code, I can pass to the next stage: Local LLM integration. This will be fun. 
 
 ## Notes 17.12.2024
-* LLM integration is unsuccessful. I cannot run *test_llm.py* script. The error is because of the **response** parameter. When I initialize ollama client, I am doing somthing wrong that creates a problem, and I cannot run the code. 
+* LLM integration is unsuccessful. I cannot run *test_llm.py* script. The error is because of the **response** parameter. When I initialize ollama client, I am doing something wrong that creates a problem, and I cannot run the code. 
 * Despite it is not running currently, I have written the base for LLM integration. I think the structure is okay and if I solve that problem, the integration will be completely successful.
 * Inside the **response_generator** script, `generate_response` method is created. The interesting point is that this method uses `generate_response` method of **ollama_client** script. `OllamaClient.generate_response` method uses the methods of *requests* library. If I am creating response like that, why didn't I use *requests* library and its methods inside the **response_generator** script directly? **_I have to look at it._**
 * As I said, LLM integration didn't work out, but it doesn't mean I am giving up on it. 
@@ -61,3 +61,15 @@ The next stage is generation of embedding and vector space. Most probably, this 
 * Although I have succeeded to integrate the retrieval system with local LLM integration, there are some points that I did not understand quite well. I have to look thorugh them again and again. I have to understand every bit of the codes.
 * Creating interface for this project would be great. I have to check it out.
 * Installation and usage (especially *ollama serve* and other ollama terminal operations) remained unclear for me. I have to check them all. 
+
+## Notes 18.12.2024
+* Modifying **OllamaClient** class so that generating response is done inside the client directly. So, there is no need to use **ResponseGenerator** class;
+* Deleted **ResponseGenerator** class and script;
+* Adding comments and documentations to **OllamaClient** class for better explainability;
+
+* I have looked through the codes and explained overall. However, there are some points that remained unclear to me, especially:
+    * `src/retrieval/search_result.py`,
+    * `src/retrieval/search_engine.py`.
+* Actually, I have understood almost everything, but some tiny details are needed for further clarification.
+
+* After this, I can start for constructing interface for this RAG project.
