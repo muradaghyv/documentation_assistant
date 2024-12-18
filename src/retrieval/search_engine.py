@@ -3,9 +3,8 @@ from ..config.retrieval_config import RetrievalConfig
 from ..database.vector_store import VectorStore
 from .query_processor import QueryProcessor
 from .search_result import SearchResult
+from ..llm.ollama_client import OllamaClient
 from ..utils.logging_utils import setup_logger
-
-from ..llm.response_generator import ResponseGenerator
 
 logger = setup_logger(__name__)
 
@@ -13,7 +12,7 @@ class SearchEngine:
     def __init__(self):
         self.vector_store = VectorStore()
         self.query_processor = QueryProcessor()
-        self.response_generator = ResponseGenerator()
+        self.llm_client = OllamaClient()
     
     def search(self, query: str, n_results: int=RetrievalConfig.top_doc, score: float=RetrievalConfig.threshold) -> List[SearchResult]:
         """Searching for a relevant document."""
@@ -53,7 +52,7 @@ class SearchEngine:
             search_results = self.search(query=query)
             
             # LLM response
-            llm_response = self.response_generator.generate_response(question=query, search_results=search_results)
+            llm_response = self.llm_client.generate_response(question=query, search_results=search_results)
 
             return {
                 "query": query,
