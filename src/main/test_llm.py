@@ -1,6 +1,7 @@
 import time
 from ..utils.logging_utils import setup_logger
 from ..retrieval.search_engine import SearchEngine
+from ..llm.ollama_client import OllamaClient
 
 logger = setup_logger(__name__)
 
@@ -10,10 +11,12 @@ def test_search_generate(query: str):
 
     try: 
         searcher = SearchEngine()
+        llm_client = OllamaClient()
 
         # Main process
         starting_time = time.time()
-        result = searcher.retrieval_generate(query=query)
+        search_result = searcher.search(query=query) # Result of the retrieval system
+        result = llm_client.generate_response(question=query, search_results=search_result) # Final result
         processing_time = time.time() - starting_time
 
         # Logging the results
