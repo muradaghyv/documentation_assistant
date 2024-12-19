@@ -76,3 +76,12 @@ The next stage is generation of embedding and vector space. Most probably, this 
 
 ### TODO
 * `src.retrieval.search_engine` script may be modified. Eliminate *retrieval_generate* method. Because inside the `src.main.test_llm` script, **OllamaClient** can be used generating response, and **search** method of *SearchEngine* object can be defined for extracting the relevant information from the documentation. Codes need to be more compact. Therefore, analyze it carefully.
+
+## Notes 19.12.2024
+* **OllamaClient** class modified. *generate_response()* method modified so that it generates an LLM response and returns all other results directly. 
+* So, inside the `src.main.test_llm` script `src.llm.ollama_client` script is used for generating and showing responses, not `src.retrieval.search_engine` script.
+* Modifying **OllamaClient** class gives us opportunity for more flexibility and simple structured codes. Therefore, I tried to cancel out abstractions of different functions over themselves for more simplicity.
+* As because I am working on another project, I couldn't run the code, so I do not know, whether it will run or not. So, the first thing is to check out whether this version will work or not. 
+
+* After ensuring LLM integration with retrieval system works fine, I can pass to the next stage which is building interface for this program. I have to decide which tool I will use for integration: streamlit, RestAPI, FastAPI, Flask or something else. One of main points is to determine which tool I can use for this objective.
+* Another important point is that, which data should I add to the back-end for making this system work properly? I mean integrating the current system with the interactive interface will be challenging.
