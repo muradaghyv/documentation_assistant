@@ -54,8 +54,14 @@ class OllamaClient:
 
             response = requests.post(self.api_endpoint, json=payload)
             response.raise_for_status() # Status code (2xx is successfull). 4xx for client errors & 5xx for server errors
+
+            final_response = response.json().get("response", "")
             
-            return response.json().get("response", "")
+            return {
+                "query": question,
+                "search_results": search_results,
+                "llm_response": final_response
+            }
             
         except requests.exceptions.RequestException as e:
             logger.error(f"Error generating LLM response: {str(e)}")
