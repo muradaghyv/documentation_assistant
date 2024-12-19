@@ -44,24 +44,3 @@ class SearchEngine:
         except Exception as e:
             logger.error(f"Error happened during retrieval process: {str(e)}")
             raise
-
-    def retrieval_generate(self, query: str) -> Dict[str, Any]:
-        """Generating LLM response according to extracted information."""
-        try:
-            # Searching relevant information
-            search_results = self.search(query=query)
-            
-            # LLM response
-            llm_response = self.llm_client.generate_response(question=query, search_results=search_results)
-
-            return {
-                "query": query,
-                "search_results": search_results,
-                "llm_response": llm_response
-            }
-        
-        except Exception as e:
-            logger.error(f"Error in generating response: {str(e)}")
-            raise
-
-
