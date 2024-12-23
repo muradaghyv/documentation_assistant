@@ -85,3 +85,10 @@ The next stage is generation of embedding and vector space. Most probably, this 
 
 * After ensuring LLM integration with retrieval system works fine, I can pass to the next stage which is building interface for this program. I have to decide which tool I will use for integration: streamlit, RestAPI, FastAPI, Flask or something else. One of main points is to determine which tool I can use for this objective.
 * Another important point is that, which data should I add to the back-end for making this system work properly? I mean integrating the current system with the interactive interface will be challenging.
+
+## Notes 23.12.2024
+* Interface is built for easy usage;
+* Interface is built with streamlit;
+* added project root to the Python root. 
+
+I have to note that for the initial version model gives a response according to the input, but I have to upgrade it so that: it has history and it can take sequential queries.
