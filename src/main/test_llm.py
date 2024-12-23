@@ -1,7 +1,11 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 import time
-from ..utils.logging_utils import setup_logger
-from ..retrieval.search_engine import SearchEngine
-from ..llm.ollama_client import OllamaClient
+from src.utils.logging_utils import setup_logger
+from src.retrieval.search_engine import SearchEngine
+from src.llm.ollama_client import OllamaClient
 
 logger = setup_logger(__name__)
 
