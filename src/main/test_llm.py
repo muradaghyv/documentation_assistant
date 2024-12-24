@@ -28,12 +28,6 @@ def test_search_generate(query: str):
         logger.info(f"\nQuery: {query}")
 
         logger.info(f"\nLLM response: \n{result['llm_response']}")
-
-        # logger.info("\nThese documents were used: \n")
-        # for i, doc in enumerate(result["search_results"], 1):
-        #     logger.info(f"\nDocument {i}")
-        #     logger.info(f"\nSource: {doc.source}")
-        #     logger.info(f"Document preview: {doc.context[:300]} . . .")
         
     except Exception as e:
         logger.error(f"An error occured: {str(e)}")

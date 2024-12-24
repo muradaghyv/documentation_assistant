@@ -29,8 +29,8 @@ def main():
 
     if st.session_state["history"]:
         for entry in st.session_state["history"]:
-            st.markdown(f"You: {entry['query']}")
-            st.markdown(f"Assistant: {entry['response']}")
+            st.markdown(f"## You: {entry['query']}")
+            st.markdown(f"## Assistant:\n{entry['response']}")
             st.markdown("------------") 
 
     if st.button("Search"):
@@ -55,12 +55,8 @@ def main():
     
     if st.session_state["history"]:
         result = st.session_state["history"][-1]
-        st.markdown(f"You: {result['query']}")
-        st.markdown(f"Assistant: {result['response']}")
-        # for entry in st.session_state["history"]:
-        #     st.markdown(f"You: {entry['query']}")
-        #     st.markdown(f"Assistant: {entry['response']}")
-        #     st.markdown("------------") 
+        st.markdown(f"## You: {result['query']}")
+        st.markdown(f"## Assistant:\n{result['response']}")
     
 if __name__ == "__main__":
 	main()          
