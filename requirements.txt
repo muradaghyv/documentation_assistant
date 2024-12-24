@@ -16,6 +16,7 @@ torch==2.5.1  # Deep learning framework
 torchvision==0.20.1  # Computer vision utilities (PyTorch dependency)
 transformers==4.46.1  # Hugging Face transformers
 uvicorn==0.32.1  # ASGI server
+streamlit==1.41.1 # Interface app
 chroma-hnswlib==0.7.3
 
 # Optional but recommended for improved performance
