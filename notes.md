@@ -92,3 +92,29 @@ The next stage is generation of embedding and vector space. Most probably, this 
 * added project root to the Python root. 
 
 I have to note that for the initial version model gives a response according to the input, but I have to upgrade it so that: it has history and it can take sequential queries.
+
+## Updates 24.12.2024
+* Although the interface was giving unexplainable results yesterday, it works normal today. The final step was building an interface for the project and it has been done. From now, the further adjustments and improvements are needed to be done.
+
+### TODO:
+* Interface works normal, but it needs to be improved:
+    * Query input box can be freezed so that when scrolling the page, box remains on the same place. So, we can see query box in each time.
+    * When inputting multiple queries sequentially, the page doesn't give me the response that I want. What I want is that when I input the query it should give the response under the previous response. It does this operation now, but it also gives warning about empty query. I do not know what happens, but it is not exactly as I want.
+    * Adding history to the interface would be great, in this case user can see its previous chats or its previous queries. 
+    * Storing history so that whenever program is run via `streamlit run src/interface/app.py` command, it shows me the previous chats.
+    * Adding *New Chat* option in which an empty chat is created whenever *New Chat* button is pressed.
+
+The first 3 bullet points about interface should be fixed, they are important. However, the rest part can be done later.
+
+* LLM response can be improved so that:
+    * Its response can be more complicated and longer.
+
+* Retrieval system can be improved:
+    * The search mechanism can be improved. As far as I know chromaDB collection object uses **cosine similarity** for finding a relevant information. I have to investigate that searching mechanism in a very detailed manner, then I might change some strategy. Also, other searching mechanisms should be investigated.
+
+* Documentation should be improved:
+    * Updating **README** file: I think it should be changed completely, overall information about project and brief description about each step is enough. More focus should be given to the installation and usage of the program. 
+    * Adding documentation and comments to the all source codes. In this way, functions will be easier to understand and handle.
+
+Project has been done successfully overall. However, it can be modified so that it is ready and practical for an end-user. For this purpose, the further improvements should go in this direction:
+    *interface* => *retrieval* => *LLM Response* => *Documentation*.
