@@ -1,13 +1,23 @@
-requests==2.31.0
-beautifulsoup4==4.12.2
-markdown==3.5.1
-tqdm==4.66.1
-chromadb==0.4.18
+# Core dependencies for RAG system
+beautifulsoup4==4.12.2  # HTML parsing for web scraping documentation
+chromadb==0.4.18  # Vector database for document storage and retrieval
+fastapi==0.115.6  # API framework
+langcodes==3.5.0  # Language detection and handling
+markdown==3.5.1  # Markdown processing for documentation
+numpy==1.26.2  # Numerical computations
+pandas==2.2.3  # Data manipulation
+pydantic==2.10.3  # Data validation
+python-dotenv==1.0.1  # Environment variable management
+requests==2.31.0  # HTTP requests for downloading documentation
+scikit-learn==1.6.0  # Machine learning utilities
+sentence-transformers==3.3.1  # Text embeddings
+spacy==3.8.3  # NLP processing
+torch==2.5.1  # Deep learning framework
+torchvision==0.20.1  # Computer vision utilities (PyTorch dependency)
+transformers==4.46.1  # Hugging Face transformers
+uvicorn==0.32.1  # ASGI server
 chroma-hnswlib==0.7.3
-fastapi==0.115.6
-uvicorn==0.32.1
-sentence-transformers==3.3.1
-transformers==4.46.1
-torch==2.5.1
-torchvision==0.20.1
-scikit-learn==1.6.0
+
+# Optional but recommended for improved performance
+nltk==3.9.1  # Natural language toolkit
+tqdm==4.66.1  # Progress bars
