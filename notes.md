@@ -118,3 +118,7 @@ The first 3 bullet points about interface should be fixed, they are important. H
 
 Project has been done successfully overall. However, it can be modified so that it is ready and practical for an end-user. For this purpose, the further improvements should go in this direction:
     *interface* => *retrieval* => *LLM Response* => *Documentation*.
+
+### Latest Update
+* I have tried to install and run the model from the scratch on my notebook and it worked quite well. 
+* I only added streamlit library to the `requirements.txt` file. The rest part is enough for running the app. It works quite well.
