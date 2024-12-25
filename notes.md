@@ -122,3 +122,7 @@ Project has been done successfully overall. However, it can be modified so that 
 ### Latest Update
 * I have tried to install and run the model from the scratch on my Laptop and it worked quite well. 
 * I only added streamlit library to the `requirements.txt` file. The rest part is enough for running the app. It works quite well.
+
+## Notes 25.12.2024
+* Updated interface so that it works well with multiple (sequential) queries. The newest query and its response is above the previous query.
+* Although I have searched for efficient implementation for sticky text input box (query box is accessible when scrolling the page) via Claude and bolt.new, I couldn't resolve the issue. I have to investigate the documentation of **streamlit** library for finding that option and integrating it via my app. 
