@@ -1,5 +1,5 @@
 ## Notes 11.12.2024
-Initially Python and Django are selected for the demo version. Hoever, in later parts, the number of programming languages and frameworks can be increased. 
+Initially Python and Django are selected for the demo version. However, in later parts, the number of programming languages and frameworks can be increased. 
 * Python documentation has been installed from their official website. This documentation is stored inside `data/raw/python_docs` as zip folder. 
 * Django documentation has been scraped from their official GitHub repository. This documentation has been saved as many .txt files inside the `data/raw/django_docs` folder. 
 
@@ -102,7 +102,7 @@ I have to note that for the initial version model gives a response according to 
     * When inputting multiple queries sequentially, the page doesn't give me the response that I want. What I want is that when I input the query it should give the response under the previous response. It does this operation now, but it also gives warning about empty query. I do not know what happens, but it is not exactly as I want.
     * Adding history to the interface would be great, in this case user can see its previous chats or its previous queries. 
     * Storing history so that whenever program is run via `streamlit run src/interface/app.py` command, it shows me the previous chats.
-    * Adding *New Chat* option in which an empty chat is created whenever *New Chat* button is pressed.
+    * Adding *New Chat* button which creates an empty chat.
 
 The first 3 bullet points about interface should be fixed, they are important. However, the rest part can be done later.
 
@@ -120,5 +120,5 @@ Project has been done successfully overall. However, it can be modified so that 
     *interface* => *retrieval* => *LLM Response* => *Documentation*.
 
 ### Latest Update
-* I have tried to install and run the model from the scratch on my notebook and it worked quite well. 
+* I have tried to install and run the model from the scratch on my Laptop and it worked quite well. 
 * I only added streamlit library to the `requirements.txt` file. The rest part is enough for running the app. It works quite well.
