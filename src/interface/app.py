@@ -27,12 +27,6 @@ def main():
     
     query = st.text_input("Input query: ", value=st.session_state["query"], key="query")
 
-    if st.session_state["history"]:
-        for entry in st.session_state["history"]:
-            st.markdown(f"## You: {entry['query']}")
-            st.markdown(f"## Assistant:\n{entry['response']}")
-            st.markdown("------------") 
-
     if st.button("Search"):
         if query:
             try:
@@ -48,15 +42,16 @@ def main():
                 st.session_state.query = ""
             
             except Exception as e:
-                st.error("An error occurred while processing your request!")
+                st.warning("An error occurred while processing your request!")
         
         else:
             st.error("Please enter your request!")    
     
     if st.session_state["history"]:
-        result = st.session_state["history"][-1]
-        st.markdown(f"## You: {result['query']}")
-        st.markdown(f"## Assistant:\n{result['response']}")
+        for entry in reversed(st.session_state["history"]):
+            st.markdown(f"## You: {entry['query']}")
+            st.markdown(f"## Assistant:\n{entry['response']}")
+            st.markdown("------------") 
     
 if __name__ == "__main__":
 	main()          
