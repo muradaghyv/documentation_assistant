@@ -6,13 +6,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
 from src.llm.ollama_client import OllamaClient
 from src.retrieval.search_engine import SearchEngine
 
+from src.utils.interface_utils import display_history
+
 def initialize_session_state():
     """Initiliazing session state."""
     if "llm_client" not in st.session_state:
         st.session_state["llm_client"] = OllamaClient(model_name="llama3.1")
         st.session_state["search_engine"] = SearchEngine()
-    if "query" not in st.session_state:
-        st.session_state["query"] = ""
     if "history" not in st.session_state:
         st.session_state["history"] = []
 
@@ -25,33 +25,29 @@ def main():
     llm_client = st.session_state["llm_client"]
     search_engine = st.session_state["search_engine"]
     
-    query = st.text_input("Input query: ", value=st.session_state["query"], key="query")
+    query = st.chat_input("Input query: ", key="query")
 
-    if st.button("Search"):
-        if query:
-            try:
-                with st.spinner("Generating response: "):
-                    search_results = search_engine.search(query)
-                    response = llm_client.generate_response(query, search_results)
-                
-                st.session_state.history.append({
-                    "query": query,
-                    "response": response["llm_response"]
-                })
-                
-                st.session_state.query = ""
+    if query:
+        try:
+            with st.spinner("Generating response: "):
+                search_results = search_engine.search(query)
+                response = llm_client.generate_response(query, search_results)
             
-            except Exception as e:
-                st.warning("An error occurred while processing your request!")
+            st.session_state.history.append({
+                "query": query,
+                "response": response["llm_response"]
+            })
+            
+            query = ""
         
-        else:
-            st.error("Please enter your request!")    
+        except Exception as e:
+            st.warning("An error occurred while processing your request!")
     
-    if st.session_state["history"]:
-        for entry in reversed(st.session_state["history"]):
-            st.markdown(f"## You: {entry['query']}")
-            st.markdown(f"## Assistant:\n{entry['response']}")
-            st.markdown("------------") 
+    else:
+        st.warning("Please enter your request!")    
+
+# Displaying the query and relevant response
+    display_history()
     
 if __name__ == "__main__":
 	main()          
