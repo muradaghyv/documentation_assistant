@@ -126,3 +126,10 @@ Project has been done successfully overall. However, it can be modified so that 
 ## Notes 25.12.2024
 * Updated interface so that it works well with multiple (sequential) queries. The newest query and its response is above the previous query.
 * Although I have searched for efficient implementation for sticky text input box (query box is accessible when scrolling the page) via Claude and bolt.new, I couldn't resolve the issue. I have to investigate the documentation of **streamlit** library for finding that option and integrating it via my app. 
+
+## Notes 26.12.2024
+* Fixed a bug: When pressing *search* button after inputting a query, it was showing the results of **except** block which executes the code when LLM response cannot be generated. I mean, if LLM response cannot be generated this exception block would run. Although this exception block ran, it was showing me LLM response. If it executes the exception blok, then why did it also give LLM response? If it gives me an LLM response, why did it execute the exception block? The problem was about **initializing session state with query key value**. I fixed that error.
+
+* Added streaming function for displaying the LLM response. Only the newest response is streamed, the previous responses are not streamed. Because if we stream the previous responses too, it would take so much time. 
+
+* Changed input query box to **chat input box**. So, chat input will be on the below of the page in each time and after a user inputs a query and press the 'Enter' button, the response will be generated and shown.
