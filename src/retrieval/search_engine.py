@@ -1,10 +1,14 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 from typing import List, Dict, Any
-from ..config.retrieval_config import RetrievalConfig
-from ..database.vector_store import VectorStore
-from .query_processor import QueryProcessor
-from .search_result import SearchResult
-from ..llm.ollama_client import OllamaClient
-from ..utils.logging_utils import setup_logger
+from src.config.retrieval_config import RetrievalConfig
+from src.database.vector_store import VectorStore
+from src.retrieval.query_processor import QueryProcessor
+from src.retrieval.search_result import SearchResult
+from src.llm.ollama_client import OllamaClient
+from src.utils.logging_utils import setup_logger
 
 logger = setup_logger(__name__)
 
