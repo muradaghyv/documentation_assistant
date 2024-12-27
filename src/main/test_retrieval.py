@@ -1,6 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 import time
-from ..retrieval.search_engine import SearchEngine
-from ..utils.logging_utils import setup_logger
+from src.retrieval.search_engine import SearchEngine
+from src.utils.logging_utils import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -31,9 +35,7 @@ def test_search(query: str) -> None:
 def main():
     """Running the test queries"""
     queries = [
-        "How do I create a virtual environment in Python?",
-        "What are Django models?",
-        "How to handle exceptions in Python?"   
+        "How do I create a virtual environment in Python?",  
     ]
 
     for query in queries:
