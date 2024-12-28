@@ -5,3 +5,4 @@ prompts.txt
 data/raw/
 data/processed/
 data/vector_store/
+*.png
