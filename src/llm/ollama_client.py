@@ -14,7 +14,7 @@ class OllamaClient:
 
     def generate_response(self, question: str, search_results: List[SearchResult],
                           system_prompt: str = PromptTemplates.SYSTEM_PROMPT,
-                          temperature: float = 0.5, max_tokens: int = 500) -> str:
+                          temperature: float = 0.5, max_tokens: int = 1200) -> str:
         """
         Generating a response with the help of Ollama Client. This response is generated according to 2 information:
         input query and relevant documentation extracted by RAG mechanism. They are joined ang fed into the LLM client.
