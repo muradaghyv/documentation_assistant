@@ -133,3 +133,28 @@ Project has been done successfully overall. However, it can be modified so that 
 * Added streaming function for displaying the LLM response. Only the newest response is streamed, the previous responses are not streamed. Because if we stream the previous responses too, it would take so much time. 
 
 * Changed input query box to **chat input box**. So, chat input will be on the below of the page in each time and after a user inputs a query and press the 'Enter' button, the response will be generated and shown.
+
+## Notes 28.12.2024
+I have done some experiments today, and observed some potential problems:
+
+### Problem about Django answers
+#### The insufficient response
+When I write *How can I start learning Django?* to the app, it returns this result:
+
+![Result of response](image.png)
+    
+The issue is that, model gives a reference to the answers, but doesn't give direct answers. For example, inside the directory `Intro Index - Part 1`, there is important information, but it is not given. I got that there is a problem about retrieval, and tried to observe the retrieval results. When I wrote the same question to the testin retrieval script (`src/main/test_retrieval.py`), it gave me the following output:
+
+![alt text](image-1.png)
+
+The above picture is one of the 5 results (_the most similar 5 documents are given_) of retrieval system. As you can see the similar problem is here. The responses of an LLM and retrieval system are relevant actually, but the content is not enough. They lack information. And, they point to the more proper answers, but do not give the most proper answers (*Intro Index - Part 1*).
+
+### Similarity scores
+I have built retrieval system so that it shows similarity score on the output. I observed that it shows the same similarity score (0.5) for all the retrieved documents which is pretty unusual. It shows a problem about searching mechanism. *Collection* object (from *ChromaDB*) uses **query** method for searching the relevant documents. This is built on cosine similarity.  
+
+### Solutions
+
+* As I have searched, retrieval system should be updated:
+    * **preprocessing** and **chunking** mechanism should be improved so that chunking mechanism has the specific structure and preprocessing step should be updated so that chunk texts contain information of the references. I mean in LLM response and retrieved contents, it shows useful references. The correct way is that it shouldn't show the references, but it has to show the content based on the references on the retrieved documents or LLM response. 
+    * the concern about similarity score should be fixed according to the improvement of searching mechanism.
+
