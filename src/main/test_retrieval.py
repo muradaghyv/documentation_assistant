@@ -34,8 +34,9 @@ def test_search(query: str) -> None:
     
 def main():
     """Running the test queries"""
+    q = input(str)
     queries = [
-        "How do I create a virtual environment in Python?",  
+        q  
     ]
 
     for query in queries:
