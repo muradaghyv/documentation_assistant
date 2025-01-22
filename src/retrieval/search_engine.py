@@ -2,7 +2,8 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 
-from typing import List, Dict, Any
+from sentence_transformers import CrossEncoder
+from typing import List
 from src.config.retrieval_config import RetrievalConfig
 from src.database.vector_store import VectorStore
 from src.retrieval.query_processor import QueryProcessor
@@ -17,6 +18,7 @@ class SearchEngine:
         self.vector_store = VectorStore()
         self.query_processor = QueryProcessor()
         self.llm_client = OllamaClient()
+        self.encoder_model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
     
     def search(self, query: str, n_results: int=RetrievalConfig.top_doc, score: float=RetrievalConfig.threshold) -> List[SearchResult]:
         """Searching for a relevant document."""
@@ -48,3 +50,10 @@ class SearchEngine:
         except Exception as e:
             logger.error(f"Error happened during retrieval process: {str(e)}")
             raise
+    
+    def ranking(self, query, documents):
+        pairs = [(query, document) for document in documents]
+        scores = self.encoder_model.predict(pairs)
+        reranked_results = sorted(zip(documents, scores), key=lambda x: x[1], reverse=True)
+        
+        return reranked_results
