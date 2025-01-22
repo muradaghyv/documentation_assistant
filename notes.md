@@ -158,3 +158,13 @@ I have built retrieval system so that it shows similarity score on the output. I
     * **preprocessing** and **chunking** mechanism should be improved so that chunking mechanism has the specific structure and preprocessing step should be updated so that chunk texts contain information of the references. I mean in LLM response and retrieved contents, it shows useful references. The correct way is that it shouldn't show the references, but it has to show the content based on the references on the retrieved documents or LLM response. 
     * the concern about similarity score should be fixed according to the improvement of searching mechanism.
 
+## Notes 22.01.2025
+* Prompt templates: **ANSWER_TEMPLATE** and **SYSTEM_PROMPT** have been updated;
+* Ranking mechanism has been added to the system. **Cross-Encoder** has been used for ranking mechanism. 
+
+* **TODO**:
+    * Retrieving 20-25 documents;
+    * Ranking them;
+    * Reranking and choosing the most relevant ones (10 of the documents that have the highest relevance scores);
+    * Integrating new retrieval process with LLM response generation.
+
