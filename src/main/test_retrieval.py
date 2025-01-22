@@ -20,14 +20,19 @@ def test_search(query: str) -> None:
 
         # Logging results
         logger.info(f"Found {len(results)} in {processing_time} seconds.")
+        documents = []
 
         if results:
-            logger.info("\nTop results:")
-            for i, result in enumerate(results, 1):
-                logger.info(f"\nResult {i}:")
-                logger.info(str(result))
+            documents = [str(document) for document in results]
         else:
             logger.info("There is no result!")
+        
+        if documents:
+            reranked_results = searcher.ranking(query=query, documents=documents)
+            for index, (doc, score) in enumerate(reranked_results):
+                logger.info(f"\nResult {index}: ")
+                logger.info(f"\nRanking Score: {score}")
+                logger.info(f"\nDocument: {doc}")
         
     except Exception as e:
         logger.error(f"An error occurred: {str(e)}")
