@@ -33,7 +33,7 @@ class DocumentProcessor:
 
         return text
     
-    def split_into_chunks(self, text: str, max_chunk_size: int = 1000) -> List[str]:
+    def split_into_chunks(self, text: str, max_chunk_size: int = 1024) -> List[str]:
         """Creates chunks with size of max_chunk_size parameter from the document."""
         chunks = []
         sentences = re.split(r'(?<=[.!?])\s+', text) # Splitting sentences from the document
@@ -42,7 +42,7 @@ class DocumentProcessor:
 
         for sentence in sentences:
             sentence_size = len(sentence)
-            if current_size+sentence_size > 1000 and current_chunk:
+            if current_size+sentence_size > max_chunk_size and current_chunk:
                 chunks.append(" ".join(current_chunk))
                 current_chunk = []
                 current_size = 0
