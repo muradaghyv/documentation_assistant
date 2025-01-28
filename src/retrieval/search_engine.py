@@ -11,6 +11,8 @@ from src.retrieval.search_result import SearchResult
 from src.llm.ollama_client import OllamaClient
 from src.utils.logging_utils import setup_logger
 
+import torch
+
 logger = setup_logger(__name__)
 
 class SearchEngine:
@@ -53,7 +55,8 @@ class SearchEngine:
     
     def ranking(self, query, documents):
         pairs = [(query, document) for document in documents]
-        scores = self.encoder_model.predict(pairs)
+        scores = self.encoder_model.predict(pairs, activation_fct=torch.nn.Sigmoid())
         reranked_results = sorted(zip(documents, scores), key=lambda x: x[1], reverse=True)
+        reranked_documents = [doc for doc, score in reranked_results]
         
-        return reranked_results
+        return reranked_results, reranked_documents[:10]
