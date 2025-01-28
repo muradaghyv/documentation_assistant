@@ -11,7 +11,7 @@ from src.utils.interface_utils import display_history
 def initialize_session_state():
     """Initiliazing session state."""
     if "llm_client" not in st.session_state:
-        st.session_state["llm_client"] = OllamaClient(model_name="llama3.1")
+        st.session_state["llm_client"] = OllamaClient(model_name="llama3.1:latest")
         st.session_state["search_engine"] = SearchEngine()
     if "history" not in st.session_state:
         st.session_state["history"] = []
@@ -31,7 +31,9 @@ def main():
         try:
             with st.spinner("Generating response: "):
                 search_results = search_engine.search(query)
-                response = llm_client.generate_response(query, search_results)
+                documents = [str(document) for document in search_results]
+                _, reranked_documents = search_engine.ranking(query, documents)
+                response = llm_client.generate_response(query, search_results, reranked_documents)
             
             st.session_state.history.append({
                 "query": query,
