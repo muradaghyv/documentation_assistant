@@ -6,7 +6,7 @@ class RetrievalConfig:
     """Defining configuration for the retrieval system."""
 
     # Number of documents to retrieve
-    top_doc: int = 5
+    top_doc: int = 25
 
     # Threshold for similarity comparison
     threshold: float = 0.5
