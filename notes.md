@@ -176,3 +176,11 @@ I have built retrieval system so that it shows similarity score on the output. I
 * LLM response was limited to 2-3k tokens, therefore, the result of LLM was short. Now, its limit is increased to 10k. So, final LLM response is quite long and enough.
 
 * All ranking, reranking processes have been integrated with all testing scripts and main interface app scripts.
+
+* **TODO**:
+    * As because the results are look pretty good, I can continue to improve the system:
+    * Adding history. When a model answers it can memorizes its previous responses and take these responses and questions into consideration when answering the current question;
+    * It is not so urgent, but I think I can add multiple documents for Python making my model more trustworthy. For example, I can add "Fluent Python" book, or other books.
+    * Research about context window size of llama models and the one that I used in my OllamaClient. What do they show exactly? What is the maximum limit for this value? How can I adjust for not limiting this limit? This is important in terms of saving the previous responses and giving that previous responses to the model. 
+
+* I think that the most important step is the integration of history and proper usage of this history. Because after accomplishing this step, I can improve the model's performance on the significant level.
