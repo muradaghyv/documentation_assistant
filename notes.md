@@ -168,3 +168,11 @@ I have built retrieval system so that it shows similarity score on the output. I
     * Reranking and choosing the most relevant ones (10 of the documents that have the highest relevance scores);
     * Integrating new retrieval process with LLM response generation.
 
+## Notes 28.01.2025
+* **Initial retrieval** of the **25** documents, then reranking of these 25 documents and selecting **10** most relevant documents have been done. 
+
+* LLM was giving errors on both scripts: on testing script and interface app script. These issues have been resolved by adding checking ollama server status and modifying the model parameters. Now, **llama3.1:latest** is used as a main LLM model. 
+
+* LLM response was limited to 2-3k tokens, therefore, the result of LLM was short. Now, its limit is increased to 10k. So, final LLM response is quite long and enough.
+
+* All ranking, reranking processes have been integrated with all testing scripts and main interface app scripts.
