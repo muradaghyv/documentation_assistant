@@ -20,7 +20,9 @@ def test_search_generate(query: str):
         # Main process
         starting_time = time.time()
         search_result = searcher.search(query=query) # Result of the retrieval system
-        result = llm_client.generate_response(question=query, search_results=search_result) # Final result
+        documents = [str(document) for document in search_result]
+        _, reranked_documents = searcher.ranking(query=query, documents=documents)
+        result = llm_client.generate_response(question=query, search_results=search_result, reranked_documents=reranked_documents) # Final result
         processing_time = time.time() - starting_time
 
         # Logging the results
