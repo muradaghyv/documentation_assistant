@@ -6,6 +6,13 @@ import time
 from src.retrieval.search_engine import SearchEngine
 from src.utils.logging_utils import setup_logger
 
+import argparse
+
+parser = argparse.ArgumentParser(description="Argument Parser for the number of the reranked results")
+parser.add_argument("--n_results", type=int, default=10,
+                    help="Set the number of the results of the reranking process.")
+args = parser.parse_args()
+
 logger = setup_logger(__name__)
 
 def test_search(query: str) -> None:
@@ -28,7 +35,7 @@ def test_search(query: str) -> None:
             logger.info("There is no result!")
         
         if documents:
-            reranked_results = searcher.ranking(query=query, documents=documents)
+            reranked_results, _ = searcher.ranking(query=query, documents=documents)[:args.n_results]
             for index, (doc, score) in enumerate(reranked_results):
                 logger.info(f"\nResult {index}: ")
                 logger.info(f"\nRanking Score: {score}")
